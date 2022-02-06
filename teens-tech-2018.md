@@ -21,5 +21,5 @@ am unable to deduce any of the other demogrpahic variable coding
 schemes. I’ll have to continue exploring, or maybe I could request a
 detailed codebook.
 
-![count of time spent online by
+[count of time spent online by
 gender](teens-tech-2018_files/figure-markdown_strict/unnamed-chunk-1-1.png)

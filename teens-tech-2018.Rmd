@@ -51,11 +51,10 @@ gender <- data %>%
   ggplot(aes(friends_online, fill=GENDER))+
            geom_histogram(stat = "count", position = "dodge")
 
-path = "~/figure-markdown_strict"
 
 ```
 
-![count of time spent online by gender](teens-tech-2018_files/figure-markdown_strict/unnamed-chunk-1-1.png)
+[count of time spent online by gender](teens-tech-2018_files/figure-markdown_strict/unnamed-chunk-1-1.png)
 
 ```{r echo=F, warning=F}
 
