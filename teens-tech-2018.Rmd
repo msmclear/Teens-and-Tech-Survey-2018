@@ -40,7 +40,7 @@ gender_table
 
 There are slightly fewer female respondents than male - the difference is slightly more pronounced than I expected it to be. Besides gender, I am unable to deduce any of the other demogrpahic variable coding schemes. I'll have to continue exploring, or maybe I could request a detailed codebook.
 
-```{r echo=F}
+```{r gender-plot, echo=F, warning=F}
 
 gender <- data %>% 
   select(FRIEND2, FRIEND3, 71:82) %>% 
@@ -51,10 +51,13 @@ gender <- data %>%
   ggplot(aes(friends_online, fill=GENDER))+
            geom_histogram(stat = "count", position = "dodge")
 
-gender
+path = "~/figure-markdown_strict"
+
 ```
 
-```{r echo=F}
+![count of time spent online by gender](teens-tech-2018_files/figure-markdown_strict/unnamed-chunk-1-1.png)
+
+```{r echo=F, warning=F}
 
 time_inperson <- data %>% 
   select(FRIEND2, FRIEND3, 71:82) %>% 
@@ -65,7 +68,5 @@ time_inperson <- data %>%
                                  ifelse(FRIEND2==3, "About once a week", "Less often")))) %>% 
   ggplot(aes(friends_online, fill=time_in_person))+
            geom_histogram(stat = "count", position = "dodge")
-
-time_inperson
 ```
 
