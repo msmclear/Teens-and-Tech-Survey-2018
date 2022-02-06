@@ -1,0 +1,14 @@
+---
+title: "teens-and-tect-2018"
+author: "Monique McLeary"
+date: "2/5/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### this is the markdown file for these analyses
+
+call in the clean data above and begin exploring
