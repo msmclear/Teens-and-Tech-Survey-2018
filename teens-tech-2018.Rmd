@@ -1,8 +1,8 @@
 ---
-title: "teens-and-tect-2018"
+title: "teens-and-tech-2018"
 author: "Monique McLeary"
 date: "2/5/2022"
-output: html_document
+output: md_document
 ---
 
 ```{r setup, include=FALSE}
