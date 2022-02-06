@@ -7,8 +7,65 @@ output: md_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(readxl)
+library(tidyverse)
+# library(kableExtra)
+
+
+data <- read_xlsx("clean-teens-tech-data.xlsx")
+
 ```
 
-### this is the markdown file for these analyses
+### Background
 
-call in the clean data above and begin exploring
+The Teens and Tech survey was administered in 2018. Click [here](https://www.pewresearch.org/internet/dataset/teens-and-tech-survey-2018/) to access the data and view published reports from Pew Research.
+
+
+### Demographics
+
+First, I want to take a look at who the survey respondents are. Let's start with gender:
+
+```{r gender, echo=F}
+
+gender_table <- data %>% 
+  select(71:82) %>% 
+  mutate(GENDER = ifelse(GENDER==1, "male", "female")) %>% 
+  group_by(GENDER) %>% tally() %>% 
+  mutate(percent = round(100*(n/sum(n)),2)) 
+  
+
+gender_table
+```
+
+There are slightly fewer female respondents than male - the difference is slightly more pronounced than I expected it to be. Besides gender, I am unable to deduce any of the other demogrpahic variable coding schemes. I'll have to continue exploring, or maybe I could request a detailed codebook.
+
+```{r echo=F}
+
+gender <- data %>% 
+  select(FRIEND2, FRIEND3, 71:82) %>% 
+  mutate(friends_online = ifelse(FRIEND2==1, "Everyday or almost every day", 
+                          ifelse(FRIEND2==2, "Several times a week", 
+                                 ifelse(FRIEND2==3, "About once a week", "Less often")))) %>% 
+  mutate(GENDER = ifelse(GENDER==1, "male", "female")) %>% 
+  ggplot(aes(friends_online, fill=GENDER))+
+           geom_histogram(stat = "count", position = "dodge")
+
+gender
+```
+
+```{r echo=F}
+
+time_inperson <- data %>% 
+  select(FRIEND2, FRIEND3, 71:82) %>% 
+  mutate(time_in_person = ifelse(FRIEND3==1, "Too much",
+                                 ifelse(FRIEND3==2, "Too little", "About the right amount"))) %>% 
+  mutate(friends_online = ifelse(FRIEND2==1, "Everyday or almost every day", 
+                          ifelse(FRIEND2==2, "Several times a week", 
+                                 ifelse(FRIEND2==3, "About once a week", "Less often")))) %>% 
+  ggplot(aes(friends_online, fill=time_in_person))+
+           geom_histogram(stat = "count", position = "dodge")
+
+time_inperson
+```
+
